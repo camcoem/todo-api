@@ -3,6 +3,8 @@ var cors = require("cors");
 
 const app = express();
 
+const PORT = 3002;
+
 const data = [
   {
     id: 1,
@@ -111,4 +113,12 @@ app.get("/", (req, res) => {
   res.json(data);
 });
 
-app.listen(3001);
+app.post("/add", (request, response) => {
+  data.push(request.body);
+  console.log(request.body);
+  response.json(data);
+});
+
+app.listen(PORT, () =>
+  console.log(`listening on port ${PORT} for your requests`)
+);
