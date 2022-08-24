@@ -3,7 +3,7 @@ var cors = require("cors");
 
 const app = express();
 
-const PORT = 3002;
+const PORT = 3003;
 
 const data = [
   {
@@ -118,6 +118,12 @@ app.post("/add", (request, response) => {
   data.push(request.body);
   console.log(request.body);
   response.json(data);
+});
+
+app.delete("/delete/id", (request, response) => {
+  data.delete(request.body);
+  console.log("Deleted", request.body);
+  response.send("DELETE Request Called");
 });
 
 app.listen(PORT, () =>
