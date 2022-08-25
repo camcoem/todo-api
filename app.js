@@ -5,7 +5,7 @@ const app = express();
 
 const PORT = 3003;
 
-const data = [
+let data = [
   {
     id: 1,
     task: "Give dog a bath",
@@ -120,10 +120,11 @@ app.post("/add", (request, response) => {
   response.json(data);
 });
 
-app.delete("/delete/id", (request, response) => {
-  data.delete(request.body);
-  console.log("Deleted", request.body);
-  response.send("DELETE Request Called");
+app.delete(`/delete`, (request, response) => {
+  // data.delete(request.body);
+  console.log(request.body.taskId);
+  data = data.filter((task) => task.id !== request.body.taskId);
+  response.json(data);
 });
 
 app.listen(PORT, () =>
